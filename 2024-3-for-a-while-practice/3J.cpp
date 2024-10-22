@@ -89,8 +89,6 @@ string div(string a, string b) {
     return ans;
 }
 int main() {
-    freopen("i","r",stdin);
-    freopen("o2","w",stdout);
     cin >> T;
     while (T--) {
         cin >> a >> op >> b;
