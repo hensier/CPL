@@ -4,18 +4,18 @@
 #include <stdbool.h>
 int T;
 char op, a[20002], b[20001], ADD[20002], SUB[20002], EMUL[202], MUL[202], DIV[102];
+void swap(char *x, char *y) {
+    char t[20002];
+    strcpy(t, x);
+    strcpy(x, y);
+    strcpy(y, t);
+}
 void reverse(char *s, int len) {
     for (char *l = s, *r = s + len - 1; l < r; l++, r--) {
         char t = *l;
         *l = *r;
         *r = t;
     }
-}
-void swap(char *x, char *y) {
-    char t[20002];
-    strcpy(t, x);
-    strcpy(x, y);
-    strcpy(y, t);
 }
 void append(char *s, int ls, char c) {
     s[ls] = c;
@@ -71,12 +71,16 @@ char *subtract(char *a, char *b) {
     reverse(SUB, la);
     int pos = 0;
     while (SUB[pos+1] && SUB[pos] == '0') pos++;
-    memcpy(SUB, SUB + pos, la - pos);
+    char t[20002] = "";
+    strncpy(t, SUB + pos, la - pos);
+    strcpy(SUB, t);
     for (int i = la - pos; SUB[i]; i++) SUB[i] = '\0';
     if (neg) {
-        char t[20002] = "";
-        memcpy(t + 1, SUB, strlen(SUB));
+        strncpy(t, SUB, strlen(SUB));
+        strcpy(SUB, t);
+        memset(t, 0, sizeof(t));
         t[0] = '-';
+        strcat(t, SUB);
         strcpy(SUB, t);
     }
     reverse(b, lb);
@@ -111,14 +115,18 @@ char *mul(char *a, char *b) {
     char t[202] = "";
     strncpy(t, MUL + pos, strlen(MUL) - pos);
     strcpy(MUL, t);
+    for (int i = strlen(MUL); MUL[i]; i++) MUL[i] = '\0';
     return MUL;
 }
 char *div(char *a, char *b) {
     memset(DIV, 0, sizeof(DIV));
     int pa = -1, pd = 0, la, lb = strlen(b);
     char sa[202] = "", sb[11][202];
-    do sa[pa] = a[++pa];
-    while (a[pa] && smaller(sa, b, la = pa + 1, lb));
+    do {
+        pa++;
+        sa[pa] = a[pa];
+        la = pa + 1;
+    } while (a[pa] && smaller(sa, b, la, lb));
     for (int i = 1; i <= 10; i++) strcpy(sb[i], easy_mul(b, i + '0'));
     do {
         int coef = 0;
@@ -130,7 +138,8 @@ char *div(char *a, char *b) {
         if (sa[0] == '0') {
             char t[202] = "";
             strncpy(t, sa + 1, --la);
-            strcpy(sa, t);
+            strcpy(DIV, t);
+            for (int i = la + 1; DIV[i]; i++) DIV[i] = '\0';
         }
     } while (a[pa]);
     return DIV;
