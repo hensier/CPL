@@ -138,8 +138,8 @@ char *div(char *a, char *b) {
         if (sa[0] == '0') {
             char t[202] = "";
             strncpy(t, sa + 1, --la);
-            strcpy(DIV, t);
-            for (int i = la + 1; DIV[i]; i++) DIV[i] = '\0';
+            strcpy(sa, t);
+            for (int i = la + 1; sa[i]; i++) sa[i] = '\0';
         }
     } while (a[pa]);
     return DIV;
