@@ -13,49 +13,49 @@ int main() {
     for (int i = 1; i <= n * m / 2; i++) {
         bool f1 = true, f2 = true, f3 = true, f4 = true;
         for (int j = pos[i][1] - 1; j; j--) {
-            if (A[j][pos[i][2]]) {
+            if (A[j][pos[i][2]] != 0) {
                 f1 = false;
                 break;
             }
         }
         for (int j = pos[i][3] - 1; j; j--) {
-            if (A[j][pos[i][4]]) {
+            if (A[j][pos[i][4]] != 0) {
                 f1 = false;
                 break;
             }
         }
         for (int j = pos[i][1] + 1; j <= n; j++) {
-            if (A[j][pos[i][2]]) {
+            if (A[j][pos[i][2]] != 0) {
                 f2 = false;
                 break;
             }
         }
         for (int j = pos[i][3] + 1; j <= n; j++) {
-            if (A[j][pos[i][4]]) {
+            if (A[j][pos[i][4]] != 0) {
                 f2 = false;
                 break;
             }
         }
         for (int j = pos[i][2] - 1; j; j--) {
-            if (A[pos[i][1]][j]) {
+            if (A[pos[i][1]][j] != 0) {
                 f3 = false;
                 break;
             }
         }
         for (int j = pos[i][4] - 1; j; j--) {
-            if (A[pos[i][3]][j]) {
+            if (A[pos[i][3]][j] != 0) {
                 f3 = false;
                 break;
             }
         }
         for (int j = pos[i][2] + 1; j <= m; j++) {
-            if (A[pos[i][1]][j]) {
+            if (A[pos[i][1]][j] != 0) {
                 f4 = false;
                 break;
             }
         }
         for (int j = pos[i][4] + 1; j <= m; j++) {
-            if (A[pos[i][3]][j]) {
+            if (A[pos[i][3]][j] != 0) {
                 f4 = false;
                 break;
             }
