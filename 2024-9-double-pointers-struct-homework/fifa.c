@@ -8,7 +8,7 @@ struct node {
     int val;
 } off[1001], def[1001], stat[1001];
 int cmp(const void *a, const void *b) {
-    return (*(struct node*)b).val - (*(struct node*)a).val;
+    return (((struct node*)b) -> val > ((struct node*)a) -> val) - (((struct node*)b) -> val < ((struct node*)a) -> val);
 }
 int main() {
     scanf("%d", &n);

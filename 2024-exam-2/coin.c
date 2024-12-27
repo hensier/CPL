@@ -3,7 +3,7 @@
 int a[10], b[4], c[4], d[4];
 long long ans;
 int cmp(const void *a, const void *b) {
-    return *(int*)a - *(int*)b;
+    return (*(int*)a > *(int*)b) - (*(int*)a < *(int*)b);
 }
 int main() {
     for (int i = 1; i <= 9; i++) scanf("%d", &a[i]);

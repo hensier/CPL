@@ -5,7 +5,7 @@ struct node {
     int t, d;
 } task[101];
 int cmp(const void *a, const void *b) {
-    return (*(struct node*)b).d - (*(struct node*)a).d;
+    return ((*(struct node*)b).d > (*(struct node*)a).d) - ((*(struct node*)b).d < (*(struct node*)a).d);
 }
 int main() {
     scanf("%d", &n);

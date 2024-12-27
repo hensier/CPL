@@ -2,7 +2,7 @@
 #include <stdlib.h>
 int n, q, A[1000000];
 int cmp(const void *a, const void *b) {
-    return *(int*)a - *(int*)b;
+    return (*(int*)a > *(int*)b) - (*(int*)a < *(int*)b);
 }
 int main() {
     scanf("%d%d", &n, &q);

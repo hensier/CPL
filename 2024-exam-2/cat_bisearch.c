@@ -4,7 +4,7 @@
 int N, R, M, posr = -1, d[1000000];
 long long D, s[1000000];
 int cmp(const void *a, const void *b) {
-    return *(int*)a - *(int*)b;
+    return (*(int*)a > *(int*)b) - (*(int*)a < *(int*)b);
 }
 bool check(int L) {
     int l = 0, r = N - 1;

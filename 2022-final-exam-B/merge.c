@@ -2,10 +2,10 @@
 #include <stdlib.h>
 int n1, n2, pos1, pos2, a[200001], b[200001], c[400001];
 int cmp_less(const void *a, const void *b) {
-    return *(int*)a - *(int*)b;
+    return (*(int*)a > *(int*)b) - (*(int*)a < *(int*)b);
 }
 int cmp_greater(const void *a, const void *b) {
-    return *(int*)b - *(int*)a;
+    return (*(int*)b > *(int*)a) - (*(int*)b < *(int*)a);
 }
 int main() {
     scanf("%d", &n1);

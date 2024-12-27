@@ -4,7 +4,7 @@
 int N, R, M, posr = -1, ans = -1, d[1000000];
 long long D;
 int cmp(const void *a, const void *b) {
-    return *(int*)a - *(int*)b;
+    return (*(int*)a > *(int*)b) - (*(int*)a < *(int*)b);
 }
 int max(int a, int b) {
     return a > b ? a : b;

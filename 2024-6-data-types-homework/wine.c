@@ -5,7 +5,7 @@ struct node {
     int val, tot;
 } wine[10001];
 int cmp(const void *a, const void *b) {
-    return (*(struct node*)b).val - (*(struct node*)a).val;
+    return (((struct node*)b) -> val > ((struct node*)a) -> val) - (((struct node*)b) -> val < ((struct node*)a) -> val);
 }
 int main() {
     scanf("%d%d", &n, &L);
