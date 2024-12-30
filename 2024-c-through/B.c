@@ -1,42 +1,51 @@
 #include <stdio.h>
-int n, m, q, sum[4002][4002], pos[1001][1001][2], npos[2001][2001][2];
+#include <stdlib.h>
+int T, cnt, t[2000001][26], siz[2000001];
+char op[7], s[21];
+void insert(char *s) {
+    for (int i = 0, p = 0; s[i]; i++) {
+        int c = s[i] - 'a';
+        if (t[p][c] == 0) t[p][c] = ++cnt;
+        p = t[p][c];
+        siz[p]++;
+    }
+}
+int find(char *s) {
+    int p = 0;
+    for (int i = 0; s[i]; i++) {
+        int c = s[i] - 'a';
+        if (t[p][c] == 0) return 0;
+        p = t[p][c];
+    }
+    return siz[p];
+}
 int main() {
-    scanf("%d%d%d", &n, &m, &q);
-    for (int i = 1, j = m, ni = 1, nj = m; i <= n;) {
-        for (int I = i, J = j, NI = ni, NJ = nj; I <= n && J <= m; I++, J++, NJ += 2) {
-            pos[I][J][0] = NI;
-            pos[I][J][1] = NJ;
-            npos[NI][NJ][0] = I;
-            npos[NI][NJ][1] = J;
-        }
-        if (j == 1) {
-            i++;
-            ni++;
-            nj++;
+    scanf("%d", &T);
+    while (T--) {
+        scanf("%s", op);
+        if (op[0] == 'i') {
+            int n;
+            scanf("%d", &n);
+            for (int i = 1; i <= n; i++) {
+                scanf("%s", s);
+                insert(s);
+            }
         }
         else {
-            j--;
-            ni++;
-            nj--;
+            scanf("%s", s);
+            int ans = find(s);
+            for (int i = 0; s[i]; i++) {
+                for (char j = 'a'; j <= 'z'; j++) {
+                    if (s[i] != j) {
+                        char t = s[i];
+                        s[i] = j;
+                        ans += find(s);
+                        s[i] = t;
+                    }
+                }
+            }
+            printf("%d\n", ans);
         }
-    }
-    for (int i = 1, x, y, d; i <= q; i++) {
-        scanf("%d%d%d", &x, &y, &d);
-        int a = pos[x][y][0] - d + 1000, b = pos[x][y][1] - d + 1000,
-        c = pos[x][y][0] + d + 1000, e = pos[x][y][1] + d + 1000;
-        sum[a][b]++;
-        sum[a][e+1]--;
-        sum[c+1][b]--;
-        sum[c+1][e+1]++;
-    }
-    for (int i = 1; i <= n + m + 1000; i++) {
-        for (int j = 1; j <= n + m + 1000; j++) {
-            sum[i][j] += sum[i][j-1] + sum[i-1][j] - sum[i-1][j-1];
-        }
-    }
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= m; j++) printf("%d ", sum[pos[i][j][0]+1000][pos[i][j][1]+1000]);
-        putchar('\n');
     }
     return 0;
 }
